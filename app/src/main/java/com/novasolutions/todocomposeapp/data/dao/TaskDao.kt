@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 /*
 
-    Esta interfaz define los métodos para interactuar con la base de datos de la tabla "tasks".
+    This interface defines the methods to interact with the database table "tasks".
 
 1. @Dao
 This annotation marks the interface as a Room DAO. Room uses it to generate the implementation code for database interactions.
