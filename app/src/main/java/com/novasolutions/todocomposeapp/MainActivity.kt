@@ -1,47 +1,35 @@
-package com.novasolutions.todocomposeapp
+package com.example.todocomposeapp
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.ViewModelProvider
+import com.novasolutions.todocomposeapp.data.database.AppDatabase
+import com.novasolutions.todocomposeapp.data.repository.TaskRepository
+import com.novasolutions.todocomposeapp.ui.MainScreen
 import com.novasolutions.todocomposeapp.ui.theme.TodoComposeAppTheme
+import com.novasolutions.todocomposeapp.ui.viewmodel.TaskViewModel
 
 class MainActivity : ComponentActivity() {
+
+    // Declarar el ViewModel
+    private lateinit var taskViewModel: TaskViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+
+        // Inicializar la base de datos y el repositorio
+        val database = AppDatabase.getDatabase(this)
+        val repository = TaskRepository(database.taskDao())
+
+        // Crear el ViewModel usando un ViewModelFactory
+        taskViewModel = TaskViewModelFactory(repository).create(TaskViewModel::class.java)
+
         setContent {
             TodoComposeAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                // Pasar el ViewModel a la UI
+                MainScreen(viewModel = taskViewModel)
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    TodoComposeAppTheme {
-        Greeting("Android")
     }
 }

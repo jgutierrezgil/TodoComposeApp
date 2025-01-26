@@ -60,31 +60,32 @@ dependencies {
     implementation(libs.androidx.material3)
 
     //Jetpack Compose UI
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.material:material")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.ui:ui-tooling")
+    implementation(libs.ui)
+    implementation(libs.androidx.material)
+    implementation(libs.ui.tooling.preview)
+    implementation(libs.ui.tooling)
 
+    implementation(com.google.dagger.hilt.android)
 
     //Lifecycle  y ViewModel
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose")
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
 
 
     // Room
-    implementation("androidx.room:room-runtime:<version>")
+    implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.common)
-    kapt("androidx.room:room-compiler:<version>")
+    kapt(libs.androidx.room.compiler)
 
     // Optativo para usar Coroutines con Room
-    implementation("androidx.room:room-ktx:<version>")
+    implementation(libs.androidx.room.ktx)
 
 
     // Coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:<version>")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:<version>")
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
 
     // Navigation Compose (opcional)
-    implementation("androidx.navigation:navigation-compose:<version>")
+    implementation(libs.androidx.navigation.compose)
 
 
     testImplementation(libs.junit)
